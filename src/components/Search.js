@@ -1,15 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-  serverTimestamp,
-  getDoc,
-} from "firebase/firestore";
+import { collection, query, where, getDocs, setDoc, doc, updateDoc, serverTimestamp, getDoc, } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 const Search = () => {
@@ -40,11 +30,7 @@ const Search = () => {
   };
 
   const handleSelect = async () => {
-    //check whether the group(chats in firestore) exists, if not create
-    const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
+    const combinedId = currentUser.uid > user.uid ? currentUser.uid + user.uid : user.uid + currentUser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -79,13 +65,7 @@ const Search = () => {
   return (
     <div className="search">
       <div className="searchForm">
-        <input
-          type="text"
-          placeholder="Find a user"
-          onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
+        <input type="text" placeholder="Find a user" onKeyDown={handleKey} onChange={(e) => setUsername(e.target.value)} value={username}/>
       </div>
       {err && <span>User not found!</span>}
       {user && (
